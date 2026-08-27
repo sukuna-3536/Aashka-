@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Aashka | My Eternal Love</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0614;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --accent-pink: #ff758c;
+            --accent-gold: #ff7eb3;
+            --text-light: #f7e7e8;
+            --text-muted: #d1b3c4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Floating Hearts Animation */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -100px;
+            color: rgba(255, 117, 140, 0.3);
+            font-size: 20px;
+            animation: floatUp 8s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Music Controls */
+        .audio-player {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .music-btn {
+            background: linear-gradient(45deg, var(--accent-pink), var(--accent-gold));
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .music-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Layout Structure */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(255, 117, 140, 0.15) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            letter-spacing: 3px;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            max-width: 650px;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Gallery / Memory Wall */
+        .gallery-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 117, 140, 0.2);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            height: 380px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .card-caption {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        /* Letter Section */
+        .letter-section {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .letter-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+        }
+
+        .letter-card p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            line-height: 2;
+            margin-bottom: 25px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .hero h2 { font-size: 1.1rem; }
+            .letter-card { padding: 30px 20px; }
+            .letter-card p { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Background Hearts -->
+    <div class="hearts-container" id="hearts"></div>
+
+    <!-- Audio Player (Soft Romantic Background Music) -->
+    <div class="audio-player">
+        <button class="music-btn" id="playBtn" onclick="toggleAudio()">▶</button>
+        <span class="music-text" id="musicStatus">Play Romantic Music 🎵</span>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-love-114250.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Aashka</h1>
+        <h2>Minha Hayat</h2>
+        <p>"Every second by your side is living poetry in my chest. You are the reason for my most sincere smiles, the comfort I always dreamed of. I love you infinitely, today and always, until for a lifetime." 💖✨📜🕊️♾️❤️</p>
+    </section>
+
+    <!-- Photo Gallery & Moments -->
+    <section>
+        <h2 class="gallery-title">Moments of Light</h2>
+        <div class="card-grid">
+            
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="1000040737.png" alt="Aashka Birthday Celebration">
+                </div>
+                <p class="card-caption">
+                    <strong>A Light in the Dark ✨🎂</strong><br>
+                    Watching your smile light up the room as you blew out your candles is a memory etched in my heart forever. You make every celebration feel like pure magic.
+                </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="1000040736.jpg" alt="Aashka Playful Eyes">
+                </div>
+                <p class="card-caption">
+                    <strong>Playful & Precious 💜👀</strong><br>
+                    I love how your eyes shine when you talk about your dreams, and how your embrace makes me feel right at home. You are both calm and strength. ✨💖🏡🕊️💪
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="1000040741.jpg" alt="Aashka Portrait">
+                </div>
+                <p class="card-caption">
+                    <strong>A Meeting of Souls 🌌💫</strong><br>
+                    Our story was born in a meeting of souls, between laughter and glances that said everything. From the very first instant, I knew you were my eternity. ✨🌌💫😊👀♾️🤍
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Romantic Letter Section -->
+    <section class="letter-section">
+        <div class="letter-card">
+            <p>"I dream of our peaceful days, building a home filled with love, where every sunrise is ours. You and me, always." 🌅🏡💖🕊️🌅♾️❤️</p>
+            <div style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: var(--accent-pink);">
+                Forever Yours
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Made with endless love for Aashka (Minha Hayat) ♾️</p>
+    </footer>
+
+    <script>
+        // Floating Hearts generator
+        const heartsContainer = id = document.getElementById('hearts');
+        const heartSymbols = ['💖', '✨', '🌸', '🤍', '🕊️'];
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 10000);
+        }
+
+        setInterval(createHeart, 600);
+
+        // Music toggle script
+        const audio = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playBtn');
+        const musicStatus = document.getElementById('musicStatus');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerText = '⏸';
+                musicStatus.innerText = 'Playing Romantic Music 🎶';
+            } else {
+                audio.pause();
+                playBtn.innerText = '▶';
+                musicStatus.innerText = 'Play Romantic Music 🎵';
+            }
+        }
+    </script>
+</body>
+</html>
